@@ -1,6 +1,7 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "cardano"
 main = "src/index.ts"
+account_id = "a49cb6147065467a1cc51778867cc3df"
 compatibility_date = "2024-08-06"
 routes = [{ pattern = "cardano.utxoedge.com", custom_domain = true }]
 
