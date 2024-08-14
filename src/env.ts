@@ -1,3 +1,5 @@
+import type { Cardano } from './cardano';
+
 export type Bindings = {
   [key in keyof CloudflareBindings]: CloudflareBindings[key];
 };
@@ -19,6 +21,7 @@ export type Variables = {
   workspaceId: string;
   token: string;
   network: CardanoNetwork;
+  cardano: Cardano;
 };
 
 export type TokenData = { id: string; chain: Chain; workspaceId: string };

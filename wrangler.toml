@@ -5,10 +5,42 @@ account_id = "a49cb6147065467a1cc51778867cc3df"
 compatibility_date = "2024-08-06"
 routes = [{ pattern = "cardano.utxoedge.com", custom_domain = true }]
 
+# TOKENS KV
 [[kv_namespaces]]
 id = "c1e7a9c9c30e495c9c4dd3188c47f842"
+preview_id = "c1e7a9c9c30e495c9c4dd3188c47f842"
 binding = "TOKENS"
 
 [[env.production.kv_namespaces]]
 id = "c1e7a9c9c30e495c9c4dd3188c47f842"
 binding = "TOKENS"
+
+# V1 MAINNET KV
+[[kv_namespaces]]
+id = "5c3368d6a999430b9d140ddc8eaae1f2"
+preview_id = "5c3368d6a999430b9d140ddc8eaae1f2"
+binding = "CARDANO_V1_MAINNET"
+
+[[env.production.kv_namespaces]]
+id = "5c3368d6a999430b9d140ddc8eaae1f2"
+binding = "CARDANO_V1_MAINNET"
+
+# V1 PREPROD KV
+[[kv_namespaces]]
+id = "c50d05ed21384920a6cfa16e05a81027"
+preview_id = "c50d05ed21384920a6cfa16e05a81027"
+binding = "CARDANO_V1_PREPROD"
+
+[[env.production.kv_namespaces]]
+id = "c50d05ed21384920a6cfa16e05a81027"
+binding = "CARDANO_V1_PREPROD"
+
+# V1 PREVIEW KV
+[[kv_namespaces]]
+id = "09776d8b203e4e04a7a066f60a7e4f78"
+preview_id = "09776d8b203e4e04a7a066f60a7e4f78"
+binding = "CARDANO_V1_PREVIEW"
+
+[[env.production.kv_namespaces]]
+id = "09776d8b203e4e04a7a066f60a7e4f78"
+binding = "CARDANO_V1_PREVIEW"
