@@ -16,8 +16,12 @@ app.use(
 
       const { id, workspaceId, chain }: TokenData = JSON.parse(data);
 
+      if (chain.name !== 'cardano') {
+        return false;
+      }
+
       c.set('apiKeyId', id);
-      c.set('chain', chain);
+      c.set('network', chain.network);
       c.set('workspaceId', workspaceId);
       c.set('token', token);
 
@@ -34,7 +38,10 @@ app.get('/info', (c) => {
   return c.json({
     id: c.var.apiKeyId,
     workspaceId: c.var.workspaceId,
-    chain: c.var.chain,
+    chain: {
+      name: 'cardano',
+      network: c.var.network,
+    },
   });
 });
 

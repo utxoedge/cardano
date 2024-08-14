@@ -2,9 +2,11 @@ export type Bindings = {
   [key in keyof CloudflareBindings]: CloudflareBindings[key];
 };
 
+export type CardanoNetwork = 'mainnet' | 'preprod' | 'preview';
+
 type Chain =
   | {
-      network: 'mainnet' | 'preprod' | 'preview';
+      network: CardanoNetwork;
       name: 'cardano';
     }
   | {
@@ -16,10 +18,10 @@ export type Variables = {
   apiKeyId: string;
   workspaceId: string;
   token: string;
-  chain: Chain;
+  network: CardanoNetwork;
 };
 
-export type TokenData = Omit<Variables, 'apiKeyId' | 'token'> & { id: string };
+export type TokenData = { id: string; chain: Chain; workspaceId: string };
 
 export type Env = {
   Bindings: Bindings;
