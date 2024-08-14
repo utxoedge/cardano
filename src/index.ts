@@ -27,7 +27,15 @@ app.use(
 );
 
 app.get('/', (c) => {
-  return c.text('UTXO Edge - Cardano');
+  return c.json({ message: 'UTXO Edge - Cardano' });
+});
+
+app.get('/info', (c) => {
+  return c.json({
+    id: c.var.apiKeyId,
+    workspaceId: c.var.workspaceId,
+    chain: c.var.chain,
+  });
 });
 
 export default app;
