@@ -3,6 +3,7 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
+    "format": "prettier --write .",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
@@ -10,6 +11,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240806.0",
+    "prettier": "^3.3.3",
     "wrangler": "^3.57.2"
   }
 }
