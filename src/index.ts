@@ -75,7 +75,7 @@ app.get('/addresses/:address/pages', async (c) => {
 
   const pageInfo = await c.var.cardano.kv.get(`${address}#page`);
 
-  const responseBody = `{"pageInfo":${pageInfo || '[]'}}`;
+  const responseBody = `{"pageInfo":${pageInfo}}`;
 
   c.header('Content-Type', 'application/json');
 
@@ -104,7 +104,7 @@ app.get('/assets/:asset/pages', async (c) => {
 
   const pageInfo = await c.var.cardano.kv.get(`${asset}#page`);
 
-  const responseBody = `{"pageInfo":${pageInfo || '[]'}}`;
+  const responseBody = `{"pageInfo":${pageInfo}}`;
 
   c.header('Content-Type', 'application/json');
 
@@ -135,7 +135,7 @@ app.get('/addresses-assets/:address/:asset/pages', async (c) => {
 
   const pageInfo = await c.var.cardano.kv.get(`${address}#${asset}#page`);
 
-  const responseBody = `{"pageInfo":${pageInfo || '[]'}}`;
+  const responseBody = `{"pageInfo":${pageInfo}}`;
 
   c.header('Content-Type', 'application/json');
 
