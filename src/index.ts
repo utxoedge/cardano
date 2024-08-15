@@ -66,4 +66,24 @@ app.get(
   },
 );
 
+app.get('/slot', async (c) => {
+  const slot = await c.var.cardano.kv.get('slot');
+
+  const responseBody = `{"slot":${slot}}`;
+
+  c.header('Content-Type', 'application/json');
+
+  return c.body(responseBody);
+});
+
+app.get('/protocol-params', async (c) => {
+  const protocolParams = await c.var.cardano.kv.get('protocol-params');
+
+  const responseBody = `{"protocolParams":${protocolParams}}`;
+
+  c.header('Content-Type', 'application/json');
+
+  return c.body(responseBody);
+});
+
 export default app;
