@@ -4,7 +4,11 @@ import { zValidator } from '@hono/zod-validator';
 
 import type { Env, TokenData } from './env';
 import { Cardano } from './cardano';
-import { utxosByAddressQuerySchema } from './validations';
+import {
+  utxosByAddressAssetQuerySchema,
+  utxosByAddressQuerySchema,
+  utxosByAssetQuerySchema,
+} from './validations';
 
 const app = new Hono<Env>();
 
@@ -65,6 +69,78 @@ app.get(
     return c.body(responseBody);
   },
 );
+
+app.get('/addresses/:address/pages', async (c) => {
+  const address = c.req.param('address');
+
+  const pageInfo = await c.var.cardano.kv.get(`${address}#page`);
+
+  const responseBody = `{"pageInfo":${pageInfo || '[]'}}`;
+
+  c.header('Content-Type', 'application/json');
+
+  return c.body(responseBody);
+});
+
+app.get(
+  '/assets/:asset/utxos',
+  zValidator('query', utxosByAssetQuerySchema),
+  async (c) => {
+    const asset = c.req.param('asset');
+    const page = c.req.valid('query').page ?? '1';
+
+    const utxos = await c.var.cardano.kv.get(`${asset}#${page}`);
+
+    const responseBody = `{"utxos":${utxos || '[]'}}`;
+
+    c.header('Content-Type', 'application/json');
+
+    return c.body(responseBody);
+  },
+);
+
+app.get('/assets/:asset/pages', async (c) => {
+  const asset = c.req.param('asset');
+
+  const pageInfo = await c.var.cardano.kv.get(`${asset}#page`);
+
+  const responseBody = `{"pageInfo":${pageInfo || '[]'}}`;
+
+  c.header('Content-Type', 'application/json');
+
+  return c.body(responseBody);
+});
+
+app.get(
+  '/addresses-assets/:address/:asset/utxos',
+  zValidator('query', utxosByAddressAssetQuerySchema),
+  async (c) => {
+    const address = c.req.param('address');
+    const asset = c.req.param('asset');
+    const page = c.req.valid('query').page ?? '1';
+
+    const utxos = await c.var.cardano.kv.get(`${address}#${asset}#${page}`);
+
+    const responseBody = `{"utxos":${utxos || '[]'}}`;
+
+    c.header('Content-Type', 'application/json');
+
+    return c.body(responseBody);
+  },
+);
+
+app.get('/addresses-assets/:address/:asset/pages', async (c) => {
+  const address = c.req.param('address');
+  const asset = c.req.param('asset');
+
+  const pageInfo = await c.var.cardano.kv.get(`${address}#${asset}#page`);
+
+  const responseBody = `{"pageInfo":${pageInfo || '[]'}}`;
+
+  c.header('Content-Type', 'application/json');
+
+  return c.body(responseBody);
+});
 
 app.get('/slot', async (c) => {
   const slot = await c.var.cardano.kv.get('slot');
